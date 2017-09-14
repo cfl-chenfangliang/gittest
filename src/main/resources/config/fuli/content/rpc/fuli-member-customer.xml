@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:hsf="http://www.taobao.com/hsf" xmlns="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.taobao.com/hsf
+       http://www.taobao.com/hsf/hsf.xsd"
+	default-autowire="byName">
+	
+	<!-- 消费一个服务 -->
+	<bean id="iCatalogApiServiceConsumer" class="com.taobao.hsf.app.spring.util.HSFSpringConsumerBean"
+		init-method="init">
+		<property name="interfaceName" value="com.dtyunxi.newretail.center.content.api.ICatalogApiService" />
+		<property name="clientTimeout"><value>60000</value></property>
+		<property name="version" value="${dtyunxi.service.version}" />
+		<property name="group" value="${dtyunxi.service.group}" />
+	</bean>
+	
+	<bean id="iCatalogQueryApiServiceConsumer" class="com.taobao.hsf.app.spring.util.HSFSpringConsumerBean"
+		init-method="init">
+		<property name="interfaceName" value="com.dtyunxi.newretail.center.content.api.query.ICatalogQueryApiService" />
+		<property name="clientTimeout"><value>60000</value></property>
+		<property name="version" value="${dtyunxi.service.version}" />
+		<property name="group" value="${dtyunxi.service.group}" />
+	</bean>
+	
+	<bean id="iArticleApiServiceConsumer" class="com.taobao.hsf.app.spring.util.HSFSpringConsumerBean"
+		init-method="init">
+		<property name="interfaceName" value="com.dtyunxi.newretail.center.content.api.IArticleApiService" />
+		<property name="clientTimeout"><value>60000</value></property>
+		<property name="version" value="${dtyunxi.service.version}" />
+		<property name="group" value="${dtyunxi.service.group}" />
+	</bean>
+	
+	<bean id="iArticleStatApiServiceConsumer" class="com.taobao.hsf.app.spring.util.HSFSpringConsumerBean"
+		init-method="init">
+		<property name="interfaceName" value="com.dtyunxi.newretail.center.content.api.IArticleStatApiService" />
+		<property name="clientTimeout"><value>60000</value></property>
+		<property name="version" value="${dtyunxi.service.version}" />
+		<property name="group" value="${dtyunxi.service.group}" />
+	</bean>
+	
+	<bean id="iArticleQueryApiServiceConsumer" class="com.taobao.hsf.app.spring.util.HSFSpringConsumerBean"
+		init-method="init">
+		<property name="interfaceName" value="com.dtyunxi.newretail.center.content.api.query.IArticleQueryApiService" />
+		<property name="clientTimeout"><value>60000</value></property>
+		<property name="version" value="${dtyunxi.service.version}" />
+		<property name="group" value="${dtyunxi.service.group}" />
+	</bean>
+	
+	<bean id="iCommentApiServiceConsumer" class="com.taobao.hsf.app.spring.util.HSFSpringConsumerBean"
+		init-method="init">
+		<property name="interfaceName" value="com.dtyunxi.newretail.center.content.api.ICommentApiService" />
+		<property name="clientTimeout"><value>60000</value></property>
+		<property name="version" value="${dtyunxi.service.version}" />
+		<property name="group" value="${dtyunxi.service.group}" />
+	</bean>
+	
+	<bean id="iCommentQueryApiServiceConsumer" class="com.taobao.hsf.app.spring.util.HSFSpringConsumerBean"
+		init-method="init">
+		<property name="interfaceName" value="com.dtyunxi.newretail.center.content.api.query.ICommentQueryApiService" />
+		<property name="clientTimeout"><value>60000</value></property>
+		<property name="version" value="${dtyunxi.service.version}" />
+		<property name="group" value="${dtyunxi.service.group}" />
+	</bean>
+	
+	<bean id="iMemberActionApiServiceConsumer" class="com.taobao.hsf.app.spring.util.HSFSpringConsumerBean"
+		init-method="init">
+		<property name="interfaceName" value="com.dtyunxi.newretail.center.content.api.IMemberActionApiService" />
+		<property name="clientTimeout"><value>60000</value></property>
+		<property name="version" value="${dtyunxi.service.version}" />
+		<property name="group" value="${dtyunxi.service.group}" />
+	</bean>
+	
+	<bean id="iMemberActionQueryApiServiceConsumer" class="com.taobao.hsf.app.spring.util.HSFSpringConsumerBean"
+		init-method="init">
+		<property name="interfaceName" value="com.dtyunxi.newretail.center.content.api.query.IMemberActionQueryApiService" />
+		<property name="clientTimeout"><value>60000</value></property>
+		<property name="version" value="${dtyunxi.service.version}" />
+		<property name="group" value="${dtyunxi.service.group}" />
+	</bean>
+	
+	<bean id="iTagApiServiceConsumer" class="com.taobao.hsf.app.spring.util.HSFSpringConsumerBean"
+		init-method="init">
+		<property name="interfaceName" value="com.dtyunxi.newretail.center.content.api.ITagApiService" />
+		<property name="clientTimeout"><value>60000</value></property>
+		<property name="version" value="${dtyunxi.service.version}" />
+		<property name="group" value="${dtyunxi.service.group}" />
+	</bean>
+	
+	<bean id="iTagQueryApiServiceConsumer" class="com.taobao.hsf.app.spring.util.HSFSpringConsumerBean"
+		init-method="init">
+		<property name="interfaceName" value="com.dtyunxi.newretail.center.content.api.query.ITagQueryApiService" />
+		<property name="clientTimeout"><value>60000</value></property>
+		<property name="version" value="${dtyunxi.service.version}" />
+		<property name="group" value="${dtyunxi.service.group}" />
+	</bean>
+	
+	
+	
+	
+
+</beans>

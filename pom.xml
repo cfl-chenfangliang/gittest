@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	 <parent>
+        <groupId>com.dtyunxi.fuli</groupId>
+        <artifactId>fuli-modules</artifactId>
+        <version>0.2.0-SNAPSHOT</version>
+    </parent>
+	<modelVersion>4.0.0</modelVersion>
+	<packaging>war</packaging>
+
+	<groupId>com.dtyunxi.fuli</groupId>
+	<artifactId>fuli-userservice</artifactId>
+	<properties>
+        <newretail-member.version>0.5.0-SNAPSHOT</newretail-member.version>
+        <newretail-user.version>0.5.0-SNAPSHOT</newretail-user.version>
+        
+         <spring-cloud-starter-pandora.version>1.0</spring-cloud-starter-pandora.version>
+		<spring-cloud-starter-hsf.version>1.0</spring-cloud-starter-hsf.version>
+		<spring-cloud-starter-sentinel.version>1.0</spring-cloud-starter-sentinel.version>
+    </properties>
+
+	<dependencies>
+	
+	<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>2.6.1</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${javax-servlet-api.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.taobao.hsf</groupId>
+			<artifactId>hsf.remoting.dubbo</artifactId>
+			<version>${hsf-dubbo.version}</version>
+		</dependency>
+
+		<!-- test -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.spockframework</groupId>
+			<artifactId>spock-spring</artifactId>
+			<version>1.0-groovy-2.4</version>
+			<scope>test</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>org.codehaus.groovy</groupId>
+					<artifactId>groovy-all</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<dependency> <!-- only required if Hamcrest matchers are used -->
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest-core</artifactId>
+			<version>1.3</version>
+			<scope>test</scope>
+		</dependency>
+
+
+		<!-- ===============main启动需要加的包===================== -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-hsf</artifactId>
+			<version>${spring-cloud-starter-hsf.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-pandora</artifactId>
+			<version>${spring-cloud-starter-pandora.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+			<version>1.4.5.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.1.0</version>
+		</dependency>
+
+
+
+
+		<dependency>
+			<groupId>com.dtyunxi.newretail</groupId>
+			<artifactId>newretail-center-contentservice</artifactId>
+			<version>0.5.0-SNAPSHOT</version>
+			<classifier>dev</classifier>
+		</dependency>
+
+		<dependency>
+			<groupId>com.dtyunxi.newretail</groupId>
+			<artifactId>newretail-center-contentapi</artifactId>
+			<version>0.5.0-SNAPSHOT</version>
+		</dependency>
+
+
+
+
+
+
+
+
+		<!-- ==========================hsf单元测试=========================== -->
+		<dependency>
+			<groupId>com.alibaba.hsf</groupId>
+			<artifactId>LightApi</artifactId>
+			<version>1.0.0</version>
+			
+		</dependency>
+
+
+
+		<dependency>
+			<groupId>com.athaydes</groupId>
+			<artifactId>spock-reports</artifactId>
+			<version>1.2.13</version>
+			<scope>test</scope>
+			<!-- this avoids affecting your version of Groovy/Spock -->
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	</dependencies>
+	<build>
+		<finalName>fuli-userservice</finalName>
+		<plugins>
+		
+
+			<!-- 该插件用于生成fat jar,并且默认排除taobao-hsf.sar这个jar包，该jar包在生产环境部署时会通过-D参数指定，所以打包时无需打包，避免资源浪费 -->
+			<plugin>
+			
+				<groupId>com.taobao.pandora</groupId>
+				<artifactId>pandora-boot-maven-plugin</artifactId>
+				<version>2.1.6.3</version>
+				<!-- 默认是排除taobao-hsf.sar，可以设置为false，不做排除 -->
+				<configuration>
+					<excludeSar>false</excludeSar>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>repackage</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>3.0.2</version>
+				<executions>
+					<execution>
+						<id>devjar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<configuration>
+							<!-- 添加classifier修饰以区别于war，保证上传成功 -->
+							<classifier>dev</classifier>
+							<includes>
+								<include>**/*</include>
+							</includes>
+							<excludes>
+								<exclude>com/dtyunxi/config/</exclude>
+							</excludes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- deploy时只上传jar包到远程仓库的配置 -->
+			<plugin>
+				<artifactId>maven-deploy-plugin</artifactId>
+				<version>2.8.2</version>
+				<executions>
+					<execution>
+						<id>default-deploy</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+						<!-- skip默认deploy插件的执行 -->
+						<configuration>
+							<skip>true</skip>
+						</configuration>
+					</execution>
+					<execution>
+						<id>deploy-file</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>deploy</goal>
+						</goals>
+						<configuration>
+							<!-- 开发阶段上传到snapshot仓库，上线阶段上传到release仓库 -->
+							<repositoryId>${deploy.repository.id}</repositoryId>
+							<url>${deploy.repository.url}</url>
+							<file>${project.build.directory}/${project.artifactId}-dev.jar</file>
+							<groupId>${project.groupId}</groupId>
+							<artifactId>${project.artifactId}</artifactId>
+							<version>${project.version}</version>
+							<classifier>dev</classifier>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.18.1</version>
+				<configuration>
+					<includes>
+						<include>**/*Spec.**</include>
+					</includes>
+					<testFailureIgnore>true</testFailureIgnore>
+					<!--<systemPropertyVariables> -->
+					<!--&lt;!&ndash;生成结果存放路径&ndash;&gt; -->
+					<!--<jacoco-agent.destfile>target/jacoco.exec</jacoco-agent.destfile> -->
+					<!--</systemPropertyVariables> -->
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.gmavenplus</groupId>
+				<artifactId>gmavenplus-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>addTestSources</goal>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+		<filters>
+			<filter>src/main/filters/filter-${deploy.env}.properties</filter>
+		</filters>
+	</build>
+	
+	
+</project>
